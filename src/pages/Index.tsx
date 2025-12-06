@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
 import { Badge } from '@/components/ui/badge';
+import BuildCalculator from '@/components/BuildCalculator';
 
 const Index = () => {
   const [damageCalc, setDamageCalc] = useState({ ap: '', dp: '', enemyDp: '' });
@@ -126,8 +127,12 @@ const Index = () => {
               <p className="text-muted-foreground">Рассчитай урон, опыт и профит для эффективного прокачки</p>
             </div>
 
-            <Tabs defaultValue="damage" className="w-full animate-scale-in">
-              <TabsList className="grid w-full grid-cols-3 mb-8 bg-card border border-border">
+            <Tabs defaultValue="builds" className="w-full animate-scale-in">
+              <TabsList className="grid w-full grid-cols-4 mb-8 bg-card border border-border">
+                <TabsTrigger value="builds" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                  <Icon name="User" size={18} className="mr-2" />
+                  Билды
+                </TabsTrigger>
                 <TabsTrigger value="damage" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   <Icon name="Sword" size={18} className="mr-2" />
                   Урон
@@ -141,6 +146,10 @@ const Index = () => {
                   Профит
                 </TabsTrigger>
               </TabsList>
+
+              <TabsContent value="builds">
+                <BuildCalculator />
+              </TabsContent>
 
               <TabsContent value="damage">
                 <Card className="p-6 border-primary/20 bg-card/50 backdrop-blur-sm">

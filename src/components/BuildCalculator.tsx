@@ -36,19 +36,19 @@ interface Build {
 }
 
 const equipmentSlots: EquipmentSlot[] = [
-  { id: 'helmet', name: 'Шлем', icon: 'Shield', position: { top: '8%', left: '50%' } },
-  { id: 'chest', name: 'Броня', icon: 'ShieldCheck', position: { top: '28%', left: '50%' } },
-  { id: 'gloves', name: 'Перчатки', icon: 'Hand', position: { top: '48%', left: '50%' } },
-  { id: 'boots', name: 'Ботинки', icon: 'Footprints', position: { top: '68%', left: '50%' } },
-  { id: 'weapon', name: 'Оружие', icon: 'Sword', position: { top: '38%', left: '20%' } },
-  { id: 'subweapon', name: 'Доп. оружие', icon: 'Swords', position: { top: '58%', left: '20%' } },
-  { id: 'awakening', name: 'Пробуждение', icon: 'Zap', position: { top: '78%', left: '20%' } },
-  { id: 'necklace', name: 'Ожерелье', icon: 'Circle', position: { top: '18%', left: '80%' } },
-  { id: 'earring1', name: 'Серьга 1', icon: 'CircleDot', position: { top: '8%', left: '20%' } },
-  { id: 'earring2', name: 'Серьга 2', icon: 'CircleDot', position: { top: '8%', left: '80%' } },
-  { id: 'ring1', name: 'Кольцо 1', icon: 'Hexagon', position: { top: '48%', left: '20%' } },
-  { id: 'ring2', name: 'Кольцо 2', icon: 'Hexagon', position: { top: '48%', left: '80%' } },
-  { id: 'belt', name: 'Пояс', icon: 'Minus', position: { top: '58%', left: '50%' } },
+  { id: 'helmet', name: 'Шлем', icon: 'Shield', position: { top: '5%', left: '50%' } },
+  { id: 'necklace', name: 'Ожерелье', icon: 'Circle', position: { top: '15%', left: '78%' } },
+  { id: 'earring2', name: 'Серьга', icon: 'CircleDot', position: { top: '35%', left: '88%' } },
+  { id: 'ring2', name: 'Кольцо', icon: 'Hexagon', position: { top: '60%', left: '85%' } },
+  { id: 'chest', name: 'Броня', icon: 'ShieldCheck', position: { top: '78%', left: '70%' } },
+  { id: 'gloves', name: 'Перчатки', icon: 'Hand', position: { top: '88%', left: '50%' } },
+  { id: 'boots', name: 'Ботинки', icon: 'Footprints', position: { top: '78%', left: '30%' } },
+  { id: 'belt', name: 'Пояс', icon: 'Minus', position: { top: '60%', left: '15%' } },
+  { id: 'ring1', name: 'Кольцо', icon: 'Hexagon', position: { top: '35%', left: '12%' } },
+  { id: 'earring1', name: 'Серьга', icon: 'CircleDot', position: { top: '15%', left: '22%' } },
+  { id: 'weapon', name: 'Оружие', icon: 'Sword', position: { top: '25%', left: '50%' } },
+  { id: 'awakening', name: 'Пробуждение', icon: 'Zap', position: { top: '40%', left: '60%' } },
+  { id: 'subweapon', name: 'Доп. оружие', icon: 'Swords', position: { top: '40%', left: '40%' } },
 ];
 
 const sampleItems: Item[] = [
@@ -128,8 +128,16 @@ export default function BuildCalculator() {
             </Button>
           </div>
 
-          <div className="relative aspect-square max-w-md mx-auto bg-gradient-to-br from-background/50 to-card border-2 border-primary/20 rounded-2xl p-8">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent rounded-2xl" />
+          <div className="relative aspect-square max-w-lg mx-auto bg-gradient-to-br from-background/50 to-card border-2 border-primary/20 rounded-full p-8">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-primary/5 to-transparent rounded-full" />
+            
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-br from-accent via-primary to-secondary rounded-full border-4 border-primary/30 shadow-2xl flex items-center justify-center animate-glow">
+              <div className="w-24 h-24 bg-background/80 rounded-full flex flex-col items-center justify-center backdrop-blur-sm">
+                <Icon name="Diamond" size={32} className="text-primary mb-1" />
+                <span className="text-xs font-bold text-primary">Алхим.</span>
+                <span className="text-xs font-bold text-primary">камень</span>
+              </div>
+            </div>
             
             {equipmentSlots.map((slot) => {
               const equippedItem = selectedBuild.equipment[slot.id];
@@ -142,13 +150,13 @@ export default function BuildCalculator() {
                       style={{ top: slot.position.top, left: slot.position.left }}
                     >
                       <div className={`
-                        w-full h-full rounded-xl border-2 
+                        w-full h-full rounded-lg border-2 
                         ${equippedItem 
-                          ? `${rarityColors[equippedItem.rarity]} border-transparent shadow-lg` 
-                          : 'bg-background/40 border-border/50 hover:border-primary/50'
+                          ? `${rarityColors[equippedItem.rarity]} border-transparent shadow-lg shadow-primary/20` 
+                          : 'bg-background/60 border-border/50 hover:border-primary/70 hover:bg-background/80'
                         }
                         transition-all duration-200 flex items-center justify-center
-                        group-hover:scale-110 group-hover:shadow-xl
+                        group-hover:scale-110 group-hover:shadow-2xl backdrop-blur-sm
                       `}>
                         <Icon 
                           name={slot.icon as any} 
